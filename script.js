@@ -1,4 +1,9 @@
 function anime_quote() {
+    document.getElementById('quoteID').textContent = '';
+    document.getElementById('characterID').textContent = '';
+    document.getElementById('animeID').textContent = '';
+    document.getElementById('loadingID').textContent = 'Loading...';
+
     fetch('https://animechan.vercel.app/api/random')
         .then(response => response.json())
         .then(data => {
@@ -8,6 +13,7 @@ function anime_quote() {
             document.getElementById('quoteID').textContent = '"' + quote + '"';
             document.getElementById('characterID').textContent = "- " + character;
             document.getElementById('animeID').textContent = anime;
+            document.getElementById('loadingID').textContent = '';
         })
         .catch(error => console.error('Error fetching data:', error));
 }
