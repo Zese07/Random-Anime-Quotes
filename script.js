@@ -1,7 +1,9 @@
+const change = document.getElementById('changeID');
+
 function anime_quote() {
-    document.getElementById('quoteID').textContent = '';
-    document.getElementById('characterID').textContent = '';
-    document.getElementById('animeID').textContent = '';
+    document.getElementById('quoteID').textContent = " ";
+    document.getElementById('characterID').textContent = " ";
+    document.getElementById('animeID').textContent = " ";
     document.getElementById('loadingID').textContent = 'Loading...';
 
     fetch('https://animechan.vercel.app/api/random')
@@ -18,7 +20,14 @@ function anime_quote() {
         .catch(error => console.error('Error fetching data:', error));
 }
 
-document.getElementById('quoteID').addEventListener('click', anime_quote);
+document.getElementById('quoteID').addEventListener('click',function () {
+    change.classList.toggle('shrink')
+
+    setTimeout(function () {
+        change.classList.remove('shrink');
+        anime_quote();
+    }, 150);
+});
 
 document.getElementById('animechanID').addEventListener('click', function () {
     window.open('https://animechan.vercel.app/')
