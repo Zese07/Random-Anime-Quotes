@@ -6,7 +6,7 @@ function anime_quote() {
     document.getElementById('animeID').textContent = " ";
     document.getElementById('loadingID').textContent = 'Loading...';
 
-    fetch('https://animechan.vercel.app/api/random')
+    fetch('https://animechan.xyz/api/random')
         .then(response => response.json())
         .then(data => {
             const quote = data.quote;
@@ -30,7 +30,7 @@ document.getElementById('quoteID').addEventListener('click',function () {
 });
 
 document.getElementById('animechanID').addEventListener('click', function () {
-    window.open('https://animechan.vercel.app/')
+    window.open('https://animechan.XYZ/')
 });
 
 window.onload = function() {
