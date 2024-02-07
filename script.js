@@ -30,7 +30,7 @@ document.getElementById('quoteID').addEventListener('click',function () {
 });
 
 document.getElementById('animechanID').addEventListener('click', function () {
-    window.open('https://animechan.XYZ/')
+    window.open('https://animechan.xyz/')
 });
 
 window.onload = function() {
