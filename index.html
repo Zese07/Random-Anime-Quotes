@@ -3,12 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Random Anime Quotes</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            display: table;
+        }
+        
+        .center {
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0 150px;
+        }
+        
+        .change {
+            transition: all 0.15s ease;
+        }
+        
+        .change.shrink {
+            transform: scale(0);
+        }
+        
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .quote, .api{
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+        
+        .quote:hover, .api:hover {
+            color: gray;
+        }
+        
+        a:hover {
+            font-size: 105%;
+        
+        }
+    </style>
 </head>
 <body>
     <div class="center">
         <div class="change" id="changeID">
-            <a class="quote" style="font-size: 19px; font-weight: bold;" id="quoteID" target="_blank"></a>
+            <a class="quote" style="font-size: 35px; font-weight: bold;" id="quoteID" target="_blank"></a>
             <p style="font-size: 17px;" id="characterID"></p>
             <p style="font-size: 15px;" id="animeID"></p>
         </div>
@@ -16,9 +66,53 @@
     </div>
 
     <div class="footer">
-        <p>API from <a class="animechan" id="animechanID" target="_blank" >Animechan</a>.</p>
+        <p>API from <a class="api" id="apiID" target="_blank" >Waifu.it</a>.</p>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const change = document.getElementById('changeID');
+
+        function anime_quote() {
+            document.getElementById('quoteID').textContent = " ";
+            document.getElementById('characterID').textContent = " ";
+            document.getElementById('animeID').textContent = " ";
+            document.getElementById('loadingID').textContent = 'Loading...';
+
+            fetch('https://waifu.it/api/v4/quote', {
+                headers: {
+                    'Authorization': 'NDY5NjcwMjc2NDUyNDUwMzA1.MTcxNjAwNzY3Mw--.b6d70c58cfd'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const quote = data.quote;
+                const character = data.author;
+                const anime = data.anime; 
+                document.getElementById('quoteID').textContent = '"' + quote + '"';
+                document.getElementById('characterID').textContent = "- " + character;
+                document.getElementById('animeID').textContent = anime;
+                document.getElementById('loadingID').textContent = '';
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        }            
+
+        document.getElementById('quoteID').addEventListener('click',function () {
+            change.classList.toggle('shrink')
+
+            setTimeout(function () {
+                change.classList.remove('shrink');
+                anime_quote();
+            }, 150);
+        });
+
+        document.getElementById('apiID').addEventListener('click', function () {
+            window.open('https://waifu.it/')
+        });
+
+        window.onload = function() {
+            anime_quote();
+        };
+    </script>
 </body>
 </html>
