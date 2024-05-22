@@ -13,10 +13,12 @@
         
         body {
             display: table;
-            background-image: url('./bg.png');
+            background: url(./bg.png) no-repeat;
+            background-attachment: fixed;
+            background-position: center bottom -150px; 
             background-size: cover;
         }
-        
+               
         .center {
             text-align: center;
             display: table-cell;
@@ -52,9 +54,37 @@
             color: gray;
         }
         
-        a:hover {
-            font-size: 105%;
-        
+        a.quote:hover {
+            font-size: 27px;
+        }
+
+        a.api:hover {
+            font-size: 18px;
+        }
+
+        .quote {
+            font-size: 25px;
+        }
+
+        #characterID {
+            font-size: 17px;
+        }
+
+        #animeID {
+            font-size: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .quote {
+                font-size: 22px; /* Smaller font size for screens narrower than 600px */
+            }
+            #characterID {
+                font-size: 14px;
+            }
+    
+            #animeID {
+                font-size: 12px;
+            }
         }
         
     </style>
@@ -62,9 +92,9 @@
 <body>
     <div class="center">
         <div class="change" id="changeID">
-            <a class="quote" style="font-size: 25px; font-weight: bold;" id="quoteID" target="_blank"></a>
-            <p style="font-size: 17px;" id="characterID"></p>
-            <p style="font-size: 15px;" id="animeID"></p>
+            <a class="quote" style="font-weight: bold;" id="quoteID" target="_blank"></a>
+            <p id="characterID"></p>
+            <p id="animeID"></p>
         </div>
         <p style="font-size: 15px;" id="loadingID"></p>
     </div>
