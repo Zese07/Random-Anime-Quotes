@@ -76,7 +76,7 @@
 
         @media (max-width: 600px) {
             .quote {
-                font-size: 22px; /* Smaller font size for screens narrower than 600px */
+                font-size: 22px; 
             }
             #characterID {
                 font-size: 14px;
@@ -132,6 +132,7 @@
         }            
 
         document.getElementById('quoteID').addEventListener('click',function () {
+            event.preventDefault();
             change.classList.toggle('shrink')
 
             setTimeout(function () {
